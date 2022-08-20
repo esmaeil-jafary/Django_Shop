@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}
+change
+{% endblock %}
+
+{% block body %}
+<h1>change password</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        <!-- baraie inke neveshtehaie defult django baraie pass ra bardarim kod zir ra comment va field ha ra tak tak seda mizanim -->
+        <!-- ravesh asli : --> 
+        {{ form.as_p }}
+
+        <!-- revesh 2 : -->
+
+            <!-- {{ form.old_password}} <br><br>
+            {{ form.new_password1 }} <br><br>
+            {{ form.new_password2 }} <br><br> -->
+
+        <!-- ravesh 3 : -->
+        <!-- <!-- <input type="password" name= "old_password" placeholder="پسورد قبلی"><br><br>
+        <input type="password" name= "password1" placeholder="پسورد جدید"><br><br>
+        <input type="password" name= "password2" placeholder="تکرار پسورد "><br><br> -->
+        
+        
+        <button type="submit">تایید</button>
+        
+    </form>
+    <!-- baraie inke dar page change ma message haie django ra hazf konim style midahim ke ul ke message ha daron an ast none shavad -->
+    <style>
+        form ul{
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+
+<!-- alan baraie ma neshan midahad form taghir passwoer ra vali neveshte ha englesh hastand va baiad beravim be -->
+<!-- setting va ghesmat AUTH-PASSWORD va az anja 4 shart pass ra farsi mikonim -->
+
+

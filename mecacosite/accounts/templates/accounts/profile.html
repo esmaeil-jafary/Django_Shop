@@ -1,0 +1,56 @@
+<!-- baraie ijad safhe karbari profile-->
+{% extends 'base.html' %}
+{% block title %}
+profile
+{% endblock %}
+
+{% block body %}
+<h1>profile</h1>
+<!--baraie namaiesh porofile karbar-->
+
+<!-- <table> -->
+    <!-- <tr> -->
+<!--        chon profile ba user klid yek be yek darand ma be user_name,... dastresi darim-->
+        <!-- <th>user: {{ profile.user.username }}</th> -->
+    <!-- </tr> -->
+    <!-- <tr> -->
+        <!-- <th> name: {{profile.user.first_name}}</th> -->
+    <!-- </tr> -->
+    <!-- <tr> -->
+        <!-- <th> last_name: {{profile.user.last_name}}</th> -->
+    <!-- </tr> -->
+    <!-- <tr> -->
+        <!-- <th> email: {{profile.user.email}}</th> -->
+    <!-- </tr> -->
+    <!-- <tr> -->
+        <!-- <th>phone: {{ profile.phone }}</th> -->
+    <!-- </tr> -->
+    <!-- <tr> -->
+        <!-- <th> address: {{profile.address}}</th> -->
+    <!-- </tr> -->
+<!-- </table> -->
+<!-- baraie update kardan safhe profile -->
+<!-- <a href="{% url 'accounts:update'%}">update_profile</a> -->
+
+<!-- baraie taghir password -->
+<!-- <a href="{% url 'accounts:change' %}">change pass</a> -->
+
+
+<!-- namayesh page profile ba bootstrap -->
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">name: {{profile.user.first_name}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">last_name: {{profile.user.last_name}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">email: {{profile.user.email}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">phone: {{ profile.phone }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">address: {{profile.address}}</h6>
+      
+      <!-- baraie update kardan safhe profile -->
+        <a href="{% url 'accounts:update'%}">update</a>
+
+      <!-- baraie taghir password -->
+        <a href="{% url 'accounts:change' %}">change</a>
+    </div>
+  </div>
+{% endblock %}

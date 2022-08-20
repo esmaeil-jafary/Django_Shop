@@ -1,0 +1,19 @@
+<!-- baraie update kardan profile -->
+{% extends 'base.html' %}
+{% block title %}
+update profile
+{% endblock %}
+
+{% block body %}
+<h1>update profile</h1>
+<!-- baraie namayesh 2ta form user va profile ke sakhtim -->
+<form action="" method="post">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ profile_form.as_p}}
+<button type="submit">update</button>
+
+
+</form>
+
+{% endblock %}

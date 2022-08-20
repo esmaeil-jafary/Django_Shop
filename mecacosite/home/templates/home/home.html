@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+<!--baraie inke har safhe ra title an ra neshan dahad-->
+{% block title %}
+مکاکاکو سرویس
+{% endblock %}
+<!--baraie inke az base.html bekhanad tag body ra-->
+{% block body %}
+    <h1>Home page</h1>
+    {% for data in category %}
+        <!-- <h1>{{ data.name }}</h1> -->
+        <!-- baraie link kardan az daste bandi be safhe mahsolat an ddaste bandi -->
+        <!-- #baraie inke ham slug va ham id ra neshan dahim -->
+        <!-- <a href="{% url 'home:category' data.slug data.id %}"> -->
+             <!-- dar bala aval ba id kar kardim(data.id) va bade ba slug neveshtim(data.slug) -->
+        <!-- chon category ra ba estefade az get_absolute_url meghdar dadim, digar url ra baiad avaz konim dar tag a      -->
+        <a href="{{ data.get_absolute_url }}">
+        <h1> {{ data.name }} </h1>
+        </a>
+        <!-- braie namaiesh picture -->
+        <img src=" {{ data.image.url }}" style="width: 200; height: 150px;" alt="" >
+        
+    {% endfor %}
+{% endblock %}

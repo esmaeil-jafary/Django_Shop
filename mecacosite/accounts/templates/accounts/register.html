@@ -1,0 +1,25 @@
+<!--bad az inke view form sabte nam ra neveshtim baiad inja ra dorost konim . method besorat pish farz get ast-->
+{% extends 'base.html'%}
+<!-- baraie inke az static estefade konim az tag load estefade mikonim-->
+{% load static %}
+{% block title %}
+register
+{% endblock %}
+<!-- alan dar tag head block css ra ijad mikonim ta beshnasad -->
+{% block css %}
+    <link rel="stylesheet" href="{% static 'accounts/register.css' %}">
+{% endblock  %}
+
+{% block body %}
+<!--novalidate baraie etebar sanji django ast va badan farsish mikonim-->
+    <form method="post" novalidate>
+<!--        baraie jologiri azhamalat baiad tag crftoken bezarim-->
+         {% csrf_token %}
+<!--       baraie namaiesh form dakhel akolad motaghaieri  ke class formeman ra barabash gharar dadim mizarim ke inja form ast  -->
+<!--        baraie namaiesh behtar form mitavan as_p ( besorat parageraf va as_table va as_ul ke behtarinash as_p ast)-->
+        {{ form.as_p }}
+<!--        baraie submit kardan-->
+        <button type="submit">reqister</button>
+    
+    </form>
+{% endblock %}

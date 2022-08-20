@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+<!--baraie inke az base.html bekhanad tag body ra-->
+
+{% block title %}
+فروشگاه
+{% endblock %}
+{% block body %}
+<h1>all product</h1>
+<!-- baraie bootstrap yek for mizanim ta nam category ha ra begirim -->
+{% for data in category%}
+<!-- Example single danger button -->
+
+<a href="{{ data.get_absolute_url}}">{{data.name}}</a>
+<div class="btn-group">
+    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <!-- Action -->
+    </button>
+    <ul class="dropdown-menu">
+        <!--  yek for daron for balaei mizanim ta nam  sub_category ha ra begirim va az daste bandi to dar to berim be category -->
+        <!-- az related_name estefade mikonim ke name an ra 'sub' gozashte bodim va chon hame daste bandi ha ra mikhahim -->
+        <!-- migoeim sub.all -->
+        {% for info in data.sub.all %}
+            <li><a class="dropdown-item" href="{{ info.get_absolute_url }}">{{info.name}}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endfor %}
+
+
+
+
+<!-- baraie namaiesh mahsolat -->
+{% for product in products %}
+<h1>{{ product.name }}</h1>
+<!-- link midahim az roie pic be safhe jozeiat(detail) -->
+<!-- va chon dar url detail id ra gereftim inja ham baiad begirim -->
+<a href="{% url 'home:detail' product.id %}">
+    <img src="{{ product.image.url}}" style="width: 300px; height: 200px;" alt="">
+</a>
+<!-- <small>price: {{ product.unit_price}}</small> -->
+<!-- if mizanim ta takfif vizhe ra neshan dahad -->
+{% if product.discount %}
+<h4 style="text-decoration: line-through ;">{{ product.unit_price }}</h4>
+<h3>{{ product.total_price }}</h3>
+{% else %}
+<!-- agar takhfif vojod nadasht gheimat asli ra neshan bede     -->
+<h3>{{ product.total_price }}</h3>
+{% endif %}
+{% endfor %}
+{% endblock %}

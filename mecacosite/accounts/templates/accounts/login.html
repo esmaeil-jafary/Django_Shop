@@ -1,0 +1,25 @@
+
+{% extends 'base.html' %}
+{% block title %}
+login
+{% endblock %}
+
+{% block body %}
+<h1>login page</h1>
+    <form method="post" novalidate>
+    {% csrf_token %}
+<!--        {{ form.as_p }}-->
+<!--        baraie taghir namayesh form va neshan dadn username dakhel filde  tag form ra be sorat zir-->
+<!--        {{ form.user }}<br><br>-->
+<!--        {{ form.password }}<br><br>-->
+
+<!--        ba html input bedahim-->
+        <input type="text" name="user" placeholder="نام کاربری را وارد کنید"><br><br>
+        <input type="password" name="password" placeholder="پسورد را وارد کنید"><br><br>
+
+        <button type="submit">login</button>
+
+    </form>
+{% endblock %}
+#------------------------------------------------------------------------------------------------
+

@@ -1,0 +1,10 @@
+<!--baraie namayesh paiam ha aval shart mizarim ke aia payam vojod darad. va chon paiam ziad darim for mizanim-->
+
+{% if messages %}
+    {% for msg in messages %}
+<!-- va shart migozarim ke agar dar message meghdar sevom yani extra tag vojod dasht bar asas hamon rang neshan bedeh-->
+        <h5 {% if msg.tags %} class="alert alert-{{msg.tags}}" {% endif%}> {{ msg }} </h5>
+<!--hala miravim file base.html va message ha ra be django moarefi konim-->
+    {% endfor %}
+
+{% endif %}

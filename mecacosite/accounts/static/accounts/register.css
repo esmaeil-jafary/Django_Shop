@@ -1,0 +1,37 @@
+/* body{
+    background-color: burlywood;
+} */
+form{
+    background-color: green;
+    margin: 150px auto;
+    width: 400px;
+    padding: 40px;
+    text-align: center;  
+    border-radius: 15px; 
+}
+
+/* baraie inke lable username va .. ra neshan nadahad */
+form label{
+    display: none;
+}
+
+form input{
+    text-align: center;
+    width: 300px;
+    height: 35px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+}
+
+form button{
+    width: 200px;
+    height: 35px;
+    border: 2px solid transparent;
+    background: yellow;
+    border-radius: 5px;
+}
+
+/* karbar raft roie dokme register rangash taghir konad */
+form button:hover{
+    background: red;
+}
