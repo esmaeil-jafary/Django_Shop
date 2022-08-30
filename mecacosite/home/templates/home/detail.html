@@ -1,10 +1,59 @@
 {% extends 'base.html' %}
- {% block title %} details {% endblock%}
+{% block title %} details {% endblock%} 
 
- {% block body %}
+{% block body %}
 <!-- chon yek meghdar ra mikhahim bargardanim for nemizanim -->
-<h1>{{ product.name}}</h1>
-<img src="{{ product.image.url }}" style="width: 500px; height: 300px;" alt="">
-<p>{{ product.information }}</p>
-<h1>{{ product.}}</h1>
- {% endblock%}
+    <h1>{{ product.name}}</h1>
+    <img src="{{ product.image.url }}" style="width: 500px; height: 300px;" alt=""><br>
+    <!-- |safe نمایش تکست خودمان اضافه کنیم تا ارور ندهد برای سی کی ادیتور -->
+    <p>{{ product.information|safe }}</p> 
+    <hr>
+    <!-- برای نمایش فرم ورینت و انتخاب آن توسط کاربر -->
+    <!-- اگر ممحصول ما در دیتا بیس شامل سایز بندی است سایزبندی را و اگر رنگبندی دارد رنگ بندی را نشان دهد -->
+    {% if product.status == 'Size' %} <!-- سایز با اس کوچک مقداری است که در استاتوس ورینت که سه مورد گذاشتیم را بر می گرداند -->
+        <form action="" method="post">
+        {% csrf_token %}
+            {% for data in variant %} <!-- چون چندین سایز داریم از حلقه استفاده می کنیم -->
+
+            <!-- برای مشخص کردن مقدار ورینت نمایش داده شده از ولیو استفاده می کنیم -->
+            <!-- و چون هر سایز ما یک ای دی دارد برای نمایش مقدار می گوییم دیتا دات ای دی -->
+            <!-- و برای اینکه کاربر فقط بتواند یکی را انتخاب کند یک شرط می گذاریم -->
+            <!-- دیتا دات ایدی انتخاب کاربر را مشخص می کند -->
+            <!-- و برای اینکه فقط یکی انتخاب شود از نام استفاده می کنیم و نام سلکت که در ویو برای ور ایدی گذاشته بودیم را می دهیم -->
+             <!-- و حالا برای گرفتن مقدار از کاربر باید تایپ را سابمیت می گذاشتیم ولی چون قبلا از رادیو استفاده کردیم از انچنچ استفاده می کنیم -->
+                <input type="radio" value="{{data.id}}" {% if variants.id == data.id %} checked {% endif %} 
+                name="select" onchange="this.form.submit();">
+
+                <!-- برای نمایش نام سایز مورد نظر یا همان ورینت و تکست دکوریشن برای برداشتن خط زیر ورینت در نمایش-->
+                <a href="" style="text-decoration:none">{{data.size_variants}}</a> 
+            {% endfor %}
+        </form>
+
+<!-- ************************************************************** -->
+            <!-- حالا برای رنگ را هم مثل بالا انجام می دهیم -->
+        {% elif product.status == 'Color' %}
+            <form action="" method="post">
+                {% csrf_token %}
+                    {% for data in variant %}
+                   
+                        <input type="radio" value="{{data.id}}" {% if variants.id == data.id %} checked {% endif %} 
+                        name="select" onchange="this.form.submit();">
+                        <a href="" style="text-decoration:none">{{data.color_variants}}</a> 
+                    {% endfor %}
+                </form>
+    {% endif %}
+    <!-- -------------------------------------------- -->
+    <!-- این قسمت برای نشان دادن محصولات مشابه توسط taggit -->
+    <hr>
+    
+    {% for tag in similar %}
+        <a href="{% url 'home:detail' tag.id %}">
+            <img style="width: 200px; height: 200px;" src="{{tag.image.url}}" alt="">
+        </a>
+    {% endfor %}
+        
+    <!-- -------------------------------------------- -->
+{% endblock body %}  
+
+       
+ 

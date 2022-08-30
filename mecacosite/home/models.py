@@ -2,6 +2,11 @@ from unicodedata import name
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+# # برای استفاده از ckeditor
+from ckeditor_uploader.fields import RichTextUploadingField
+
+#برای ایجاد محصولات مشابه
+from taggit.managers import TaggableManager
 # برای محصولات
 class Category(models.Model):
     # baraie ijad category haie to dar to az relationships estefade mikonim:
@@ -73,12 +78,15 @@ class Product(models.Model):
     discount = models.PositiveIntegerField(null=True, blank=True)
     # gheimat nahaie : gheimat - takhfif = gheimat nahaie ke be karbar neshan midahim
     total_price = models.PositiveIntegerField()
-    information = models.TextField(null=True, blank=True)#etelaat mahsol
+    information = RichTextUploadingField(null=True, blank=True)#etelaat mahsol
     create = models.DateTimeField(auto_now_add=True)#auto_now_add yani harvagh category ijad shod django tarikh va zaman ra sabt mikonad
     update = models.DateTimeField(auto_now=True)
     #mojod bodan ya nabodan product. va agar khostim faghat mahsolati ke mojode ra neshan bedim azsh estefade konim
     available = models.BooleanField(default=True)#harvaght mahsol jadid ijad mikonim khodash neshan dahad va agar frokhtim tikash ra 
     #bezanim ta neshan nadahad.
+
+# برای نمایش محصولات مشابه توسط تگیت
+    tags = TaggableManager(blank=True)
 
     #baraie inke harbar ke yek mahsol tarif mikonim , entekhab konim ke mahsol saiz bandi rang bandi darad ya hichkodam
     status = models.CharField(max_length=200, null=True, blank=True, choices=VARIANT)#choices yani ma mitavanim entekhab konim 
@@ -97,7 +105,7 @@ class Product(models.Model):
     def total_price(self):
         #agar takhfif nadasht
         if not self.discount:
-            return unit_price
+            return self.unit_price
         #agar takhfif dasht
         elif self.discount:
             #hala darsad ra mohasebe mikonim
@@ -113,17 +121,21 @@ class Product(models.Model):
     #baraie model size va color dar VARAINT
 class Size(models.Model):
     name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
 
 class Color(models.Model):
     name = models.CharField(max_length=200)
+    def __str__(self):
+        return self.name
 
     #alan be yek model jadid niaz darim ke agar da admin panel entekhab kardim ke size bandi darim va harkodam gheimat joda darand
     #model zir ra minevisim
 class Variaants(models.Model):
     name = models.CharField(max_length=100)
-    product_variants = models.ForeignKey(Product, on_delete=models.CASCADE)
-    size_variants = models.ForeignKey(Size, on_delete=models.CASCADE)
-    color_variants = models.ForeignKey(Color, on_delete=models.CASCADE)
+    product_variants = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='pr')
+    size_variants = models.ForeignKey(Size, on_delete=models.CASCADE,blank=True, null=True)
+    color_variants = models.ForeignKey(Color, on_delete=models.CASCADE,blank=True, null=True)
 
         #baraie inke be har mahsol vije yek gheimat va takhfif va ... bedahin az model Product copy mikonim
 
@@ -146,7 +158,7 @@ class Variaants(models.Model):
     def total_price(self):
         #agar takhfif nadasht
         if not self.discount:
-            return unit_price
+            return self.unit_price
         #agar takhfif dasht
         elif self.discount:
             #hala darsad ra mohasebe mikonim

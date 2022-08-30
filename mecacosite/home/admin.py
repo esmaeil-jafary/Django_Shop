@@ -7,7 +7,7 @@ from . models import *
 
 class ProductVariantInline(admin.TabularInline): #StackedInline be sorat khati neshan midahad
     #hala modeli ke gharar ast be Product ezafe beshavad ra moshakhas mikonim
-    model = Variaants 
+    model = Variaants
     #dar admin panel 2 radif baraie por kardan bezarim. mishavad adad ra avaz kard . defult 3tast
     extra = 2
 
@@ -35,7 +35,7 @@ class CategoryAdmin(admin.ModelAdmin):
 # baraie product
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'create', 'update','amount','available', 'unit_price', 'discount', 'total_price']
+    list_display = ['name', 'create', 'update','amount','available', 'unit_price', 'discount', 'total_price',]
     list_filter = ('available',) # bar asas mojod bodan filter kon
 
     #agar bekhahim yek fild baraie viraiesh sari dar page dashte bashim az vizhegi list_editable estefase mikonim. masalan tedad
@@ -47,10 +47,14 @@ class ProductAdmin(admin.ModelAdmin):
     #baraie inke model Variant ra dar Product neshan dahad.(mitavanim chandin model ra vared Product konim)
     inlines = [ProductVariantInline]
 
+#برای مشاهده نام و ایدی در قسمت سایز و رنگ در پنل ادمین
+class VariantAdmin(admin.ModelAdmin):
+    list_display = ['name','id']
+class SizeAdmin(admin.ModelAdmin):
+    list_display = ['name','id']
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
-admin.site.register(Variaants)
-admin.site.register(Size)
+admin.site.register(Variaants, VariantAdmin) 
+admin.site.register(Size, SizeAdmin)
 admin.site.register(Color)
-

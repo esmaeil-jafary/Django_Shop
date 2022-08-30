@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,6 +41,10 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'accounts.apps.AccountsConfig',
     'phone_field',        #baraie format phone va namayesh 0 aval
+    #ckeditor
+    'ckeditor',
+    'ckeditor_uploader',
+    'taggit',     #baraie namayesh mahsolat moshbeh
 ]
 
 MIDDLEWARE = [
@@ -130,4 +135,18 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#CKEDITOR
+CKEDITOR_UPLOAD_PATH = 'ck/'
+#برای اینکه تنظیمات بیشتری داشته باشیم در سی کی ادیتور
+CKEDITOR_CONFIGS = {
+    'default':{
+        'toolbar': 'full',
+    },
+}
+# ************************************
+# برای اینکه در تگیت وقتی در پنل ادمین می خواهیم نام دسته بندی یا برند یا هرچیزی که میخواهیم بعنوان محصول مشابه نشان
+# دهیم به حروف بزرگ و کوچک حساس نباشد
+TAGGIT_CASE_INSENSITIVE=True
+# ************************************

@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls), # baraie amniat address admin ra taghir bedim
     path('',include('home.urls', namespace='home')),
-    path('accounts/', include('accounts.urls', namespace='accounts'))
+    path('accounts/', include('accounts.urls', namespace='accounts')),
+    path('ckeditor/', include('ckeditor_uploader.urls'))
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 #baraie static va media file ha mibasha kod bala
- 
